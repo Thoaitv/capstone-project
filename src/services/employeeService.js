@@ -32,14 +32,20 @@ export function generateEmployeeId() {
   return id;
 }
 
+// export function getAllEmployees() {
+//   if (localStorage.getItem(KEYS.employees) == null)
+//     localStorage.setItem(KEYS.employees, JSON.stringify([]));
+//   let employees = JSON.parse(localStorage.getItem(KEYS.employees));
+//   //map departmentID to department title
+//   let departments = getDepartmentCollection();
+//   return employees.map((x) => ({
+//     ...x,
+//     department: departments[x.departmentId - 1].title,
+//   }));
+// }
+
 export function getAllEmployees() {
   if (localStorage.getItem(KEYS.employees) == null)
     localStorage.setItem(KEYS.employees, JSON.stringify([]));
-  let employees = JSON.parse(localStorage.getItem(KEYS.employees));
-  //map departmentID to department title
-  let departments = getDepartmentCollection();
-  return employees.map((x) => ({
-    ...x,
-    department: departments[x.departmentId - 1].title,
-  }));
+  return JSON.parse(localStorage.getItem(KEYS.employees));
 }

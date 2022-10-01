@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import Input from '../../components/controls/Input';
 import { Controls } from '../../components/controls/Controls';
 import useForm, { Form } from '../../components/useForm';
+import useTable from '../../components/useTable';
 import * as employeeService from '../../services/employeeService';
 
 const genderItems = [
@@ -40,15 +41,12 @@ export default function EmployeeForm() {
       ...temp,
     });
 
-    // console.log(temp);
     if (fieldValues == values)
       return Object.values(temp).every((x) => x === '');
   };
 
   const { values, setValues, errors, setErrors, resetForm, handleInputChange } =
     useForm(initialValues, true, validate);
-
-  // console.log(validate());
 
   const handleSubmit = (e) => {
     e.preventDefault();
