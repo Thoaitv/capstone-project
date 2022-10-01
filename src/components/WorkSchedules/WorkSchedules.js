@@ -17,7 +17,7 @@ import {
   Resources,
   DragDropProvider,
 } from '@devexpress/dx-react-scheduler-material-ui';
-import WbSunny from '@mui/icons-material/WbSunny';
+// import WbSunny from '@mui/icons-material/WbSunny';
 import FilterDrama from '@mui/icons-material/FilterDrama';
 import Opacity from '@mui/icons-material/Opacity';
 import ColorLens from '@mui/icons-material/ColorLens';
@@ -30,10 +30,10 @@ const classes = {
   content: `${PREFIX}-content`,
   text: `${PREFIX}-text`,
   sun: `${PREFIX}-sun`,
-  cloud: `${PREFIX}-cloud`,
-  rain: `${PREFIX}-rain`,
+  // cloud: `${PREFIX}-cloud`,
+  // rain: `${PREFIX}-rain`,
   sunBack: `${PREFIX}-sunBack`,
-  cloudBack: `${PREFIX}-cloudBack`,
+  // cloudBack: `${PREFIX}-cloudBack`,
   rainBack: `${PREFIX}-rainBack`,
   opacity: `${PREFIX}-opacity`,
   appointment: `${PREFIX}-appointment`,
@@ -66,23 +66,23 @@ const DayScaleCell = (props) => (
 );
 
 // #FOLD_BLOCK
-const StyledOpacity = styled(Opacity)(() => ({
-  [`&.${classes.rain}`]: {
-    color: '#4FC3F7',
-  },
-}));
+// const StyledOpacity = styled(Opacity)(() => ({
+//   [`&.${classes.rain}`]: {
+//     color: '#4FC3F7',
+//   },
+// }));
 // #FOLD_BLOCK
-const StyledWbSunny = styled(WbSunny)(() => ({
-  [`&.${classes.sun}`]: {
-    color: '#FFEE58',
-  },
-}));
+// const StyledWbSunny = styled(WbSunny)(() => ({
+//   [`&.${classes.sun}`]: {
+//     color: '#FFEE58',
+//   },
+// }));
 // #FOLD_BLOCK
-const StyledFilterDrama = styled(FilterDrama)(() => ({
-  [`&.${classes.cloud}`]: {
-    color: '#90A4AE',
-  },
-}));
+// const StyledFilterDrama = styled(FilterDrama)(() => ({
+//   [`&.${classes.cloud}`]: {
+//     color: '#90A4AE',
+//   },
+// }));
 
 // #FOLD_BLOCK
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -114,9 +114,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${classes.sunBack}`]: {
     backgroundColor: '#FFFDE7',
   },
-  [`&.${classes.cloudBack}`]: {
-    backgroundColor: '#ECEFF1',
-  },
+  // [`&.${classes.cloudBack}`]: {
+  //   backgroundColor: '#ECEFF1',
+  // },
   [`&.${classes.rainBack}`]: {
     backgroundColor: '#E1F5FE',
   },
@@ -257,12 +257,12 @@ const resources = [
 
 const WeatherIcon = ({ id }) => {
   switch (id) {
-    case 0:
-      return <StyledOpacity className={classes.rain} fontSize="large" />;
-    case 1:
-      return <StyledWbSunny className={classes.sun} fontSize="large" />;
-    case 2:
-      return <StyledFilterDrama className={classes.cloud} fontSize="large" />;
+    // case 0:
+    //   return <StyledOpacity className={classes.rain} fontSize="large" />;
+    // case 1:
+    //   return <StyledWbSunny className={classes.sun} fontSize="large" />;
+    // case 2:
+    //   return <StyledFilterDrama className={classes.cloud} fontSize="large" />;
     default:
       return null;
   }
@@ -288,7 +288,7 @@ const CellBase = React.memo(
           [classes.cell]: true,
           [classes.rainBack]: iconId === 0,
           [classes.sunBack]: iconId === 1,
-          [classes.cloudBack]: iconId === 2,
+          // [classes.cloudBack]: iconId === 2,
           [classes.opacity]: otherMonth,
         })}>
         <StyledDivContent className={classes.content}>

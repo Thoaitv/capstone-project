@@ -93,7 +93,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/"
+                to="/bac-si"
                 className="flex cursor-pointer py-3 text-gray-300 hover:text-white dark:text-slate-300 dark:hover:text-white">
                 <span className="inline-flex justify-center items-center w-16 h-6 flex-none ">
                   <svg
@@ -108,6 +108,26 @@ const Sidebar = () => {
                 </span>
                 <span className="grow text-ellipsis line-clamp-1 pr-12 ">
                   Bác sĩ
+                </span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/demo-dialog"
+                className="flex cursor-pointer py-3 text-gray-300 hover:text-white dark:text-slate-300 dark:hover:text-white">
+                <span className="inline-flex justify-center items-center w-16 h-6 flex-none ">
+                  <svg
+                    viewBox="0 0 24 24"
+                    width="18"
+                    height="18"
+                    className="inline-block">
+                    <path
+                      fill="currentColor"
+                      d="M21,16H3V4H21M21,2H3C1.89,2 1,2.89 1,4V16A2,2 0 0,0 3,18H10V20H8V22H16V20H14V18H21A2,2 0 0,0 23,16V4C23,2.89 22.1,2 21,2Z"></path>
+                  </svg>
+                </span>
+                <span className="grow text-ellipsis line-clamp-1 pr-12 ">
+                  Demo dialog
                 </span>
               </Link>
             </li>

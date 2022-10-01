@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { rows } from '../../DummyData';
 import WorkSchedules from '../WorkSchedules/WorkSchedules';
@@ -25,7 +25,7 @@ const AdminOverview = () => {
   ];
 
   return (
-    <div>
+    <Fragment>
       {/* <section> */}
       <section className="p-6 xl:max-w-6xl xl:mx-auto">
         <section className=" mb-6 flex items-center justify-between">
@@ -453,7 +453,7 @@ const AdminOverview = () => {
           </div>
         </div>
       </section>
-    </div>
+    </Fragment>
   );
 };
 

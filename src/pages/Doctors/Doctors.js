@@ -1,40 +1,53 @@
+// import { makeStyles } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
+import { Controls } from '../../components/controls/Controls';
+import AddPatient from '../../components/Patient/AddPatient';
+import Popup from '../../components/Popup/Popup';
+import PopupAdd from '../../components/Popup/PopupAdd';
 import { rows } from '../../DummyData';
-import AddPatient from './AddPatient';
-import Button from '@mui/material/Button';
-const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'First name', width: 130 },
-  { field: 'lastName', headerName: 'Last name', width: 130 },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 90,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
-];
 
-const ListPatient = () => {
-  const [open, setOpen] = React.useState(false);
+// const useStyles = makeStyles((theme) => ({
+//   pageContent: {
+//     margin: theme.spacing(5),
+//     padding: theme.spacing(5),
+//   },
+// }));
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+const Doctors = () => {
+  //   const classes = useStyles();
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'firstName', headerName: 'First name', width: 130 },
+    { field: 'lastName', headerName: 'Last name', width: 130 },
+    {
+      field: 'age',
+      headerName: 'Age',
+      type: 'number',
+      width: 90,
+    },
+    {
+      field: 'fullName',
+      headerName: 'Full name',
+      description: 'This column has a value getter and is not sortable.',
+      sortable: false,
+      width: 160,
+      valueGetter: (params) =>
+        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+    },
+  ];
+  const [openPopup, setOpenPopup] = useState(false);
   return (
+    // <div>
+    //   <Controls.Button
+    //     type="button"
+    //     text="Add new"
+    //     color="success"
+    //     size="small"
+    //     onClick={() => setOpenPopup(true)}
+    //   />
+    //   <Popup openPopup={openPopup} setOpenPopup={setOpenPopup} />
+    // </div>
     <Fragment>
       <section className="p-6 xl:max-w-6xl xl:mx-auto">
         <section className=" mb-6 flex items-center justify-between">
@@ -54,25 +67,26 @@ const ListPatient = () => {
               Bệnh nhân sẽ khám trong ngày 12/12/2022
             </h1>
           </div>
-          <a className="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded-full border-gray-800 dark:border-white ring-gray-300 dark:ring-gray-400 bg-gray-800 text-white dark:bg-white dark:text-black hover:bg-gray-700 hover:dark:bg-slate-100  text-sm px-3 py-1">
-            <span className="inline-flex justify-center items-center w-6 h-6 ">
-              <svg
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                className="inline-block">
-                <path
-                  fill="currentColor"
-                  d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z"></path>
-              </svg>
-            </span>
-            <span className="px-1 ">
-              <Button variant="outlined" onClick={handleClickOpen}>
-                Thêm bệnh nhân
-              </Button>
-              <AddPatient />
-            </span>
-          </a>
+          {/* <a className="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded-full border-gray-800 dark:border-white ring-gray-300 dark:ring-gray-400 bg-gray-800 text-white dark:bg-white dark:text-black hover:bg-gray-700 hover:dark:bg-slate-100  text-sm px-3 py-1"> */}
+          {/* <span className="inline-flex justify-center items-center w-6 h-6 "> */}
+          {/* <svg
+            style="color: white"
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-plus"
+            viewBox="0 0 16 16">
+            {' '}
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+              fill="white"></path>{' '}
+          </svg> */}
+          {/* </span> */}
+          <span className="px-1 ">
+            <AddPatient />
+          </span>
+          {/* </a> */}
         </section>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="flex flex-col justify-between">
@@ -290,4 +304,4 @@ const ListPatient = () => {
   );
 };
 
-export default ListPatient;
+export default Doctors;
