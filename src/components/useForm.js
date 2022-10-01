@@ -39,7 +39,11 @@ import React, { useState } from 'react';
 //   );
 // }
 
-export default function useForm(initialFValues) {
+export default function useForm(
+  initialFValues,
+  validateOnChange = false,
+  validate
+) {
   const [values, setValues] = useState(initialFValues);
   const [errors, setErrors] = useState({});
 
@@ -49,6 +53,7 @@ export default function useForm(initialFValues) {
       ...values,
       [name]: value,
     });
+    if (validateOnChange) validate({ [name]: value });
   };
 
   const resetForm = () => {
@@ -77,6 +82,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function Form(props) {
   const classes = useStyles();
+
   const { children, ...other } = props;
   return (
     <form className={classes.root} autoComplete="off" {...other}>

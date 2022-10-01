@@ -7,8 +7,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ListPatient from './components/Patient/ListPatient';
 import PatientProfile from './components/Patient/PatientProfile';
 import Doctors from './pages/Doctors/Doctors';
-import DoctorForm from './pages/Doctors/DoctorForm';
-import DemoDialog from './components/Dialog/DemoDialog';
+// import DoctorForm from './pages/Doctors/DoctorForm';
+// import DemoDialog from './components/Dialog/DemoDialog';
 import Employees from './pages/Employees/Employees';
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/benh-nhan" element={<ListPatient />} />
             <Route path="/chi-tiet-benh-nhan" element={<PatientProfile />} />
-            <Route path="/bac-si" element={<Doctors />} />
+            {/* <Route path="/bac-si" element={<Doctors />} /> */}
             <Route path="/demo-dialog" element={<Employees />} />
           </Routes>
         </div>
