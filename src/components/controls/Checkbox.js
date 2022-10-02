@@ -21,11 +21,10 @@ export default function Checkbox(props) {
         control={
           <MuiCheckbox
             name={name}
-            color="primary"
+            color="success"
             checked={value}
-            onChange={
-              (e) => onChange(convertToDefEventPara(name, e.target.checked))
-              //   onChange((name, e.target.checked))
+            onChange={(e) =>
+              onChange(convertToDefEventPara(name, e.target.checked))
             }
           />
         }

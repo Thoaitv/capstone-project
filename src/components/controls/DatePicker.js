@@ -1,35 +1,3 @@
-// import React from 'react';
-// import {
-//   MuiPickersUtilsProvider,
-//   KeyboardDatePicker,
-// } from '@material-ui/pickers';
-// import DateFnsUtils from '@date-io/date-fns';
-
-// export default function DatePicker(props) {
-//   const { name, label, value, onChange } = props;
-
-//   const convertToDefEventPara = (name, value) => ({
-//     target: {
-//       name,
-//       value,
-//     },
-//   });
-
-//   return (
-//     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-//       <KeyboardDatePicker
-//         disableToolbar
-//         variant="inline"
-//         inputVariant="outlined"
-//         label={label}
-//         format="MMM/dd/yyyy"
-//         name={name}
-//         value={value}
-//         onChange={(date) => onChange(convertToDefEventPara(name, date))}
-//       />
-//     </MuiPickersUtilsProvider>
-//   );
-// }
 import * as React from 'react';
 import dayjs from 'dayjs';
 import TextField from '@mui/material/TextField';
@@ -50,7 +18,7 @@ export default function BasicDateTimePicker(props) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker
+      <DateTimePicker
         renderInput={(props) => <TextField {...props} />}
         label={label}
         value={value}

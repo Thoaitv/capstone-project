@@ -1,14 +1,12 @@
-import { Table } from '@mui/material';
+import {
+  Table,
+  TableCell,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+} from '@mui/material';
 import React, { useState } from 'react';
-// import {
-//   Table,
-//   TableHead,
-//   TableRow,
-//   TableCell,
-//   makeStyles,
-//   TablePagination,
-//   TableSortLabel,
-// } from '@material-ui/core';
 
 // const useStyles = makeStyles((theme) => ({
 //   table: {
@@ -29,7 +27,7 @@ import React, { useState } from 'react';
 // }));
 
 export default function useTable(records, headCells, filterFn) {
-  //   const classes = useStyles();
+  // const classes = useStyles();
 
   const pages = [5, 10, 25];
   const [page, setPage] = useState(0);
@@ -38,8 +36,8 @@ export default function useTable(records, headCells, filterFn) {
   const [orderBy, setOrderBy] = useState();
 
   const TblContainer = (props) => (
-    // <Table className={classes.table}>{props.children}</Table>
     <Table>{props.children}</Table>
+    // <Table className={classes.table}>{props.children}</Table>
   );
 
   const TblHead = (props) => {
@@ -50,29 +48,28 @@ export default function useTable(records, headCells, filterFn) {
     };
 
     return (
-      //   <TableHead>
-      //     <TableRow>
-      //       {headCells.map((headCell) => (
-      //         <TableCell
-      //           key={headCell.id}
-      //           sortDirection={orderBy === headCell.id ? order : false}>
-      //           {headCell.disableSorting ? (
-      //             headCell.label
-      //           ) : (
-      //             <TableSortLabel
-      //               active={orderBy === headCell.id}
-      //               direction={orderBy === headCell.id ? order : 'asc'}
-      //               onClick={() => {
-      //                 handleSortRequest(headCell.id);
-      //               }}>
-      //               {headCell.label}
-      //             </TableSortLabel>
-      //           )}
-      //         </TableCell>
-      //       ))}
-      //     </TableRow>
-      //   </TableHead>
-      <div></div>
+      <TableHead>
+        <TableRow>
+          {headCells.map((headCell) => (
+            <TableCell
+              key={headCell.id}
+              sortDirection={orderBy === headCell.id ? order : false}>
+              {headCell.disableSorting ? (
+                headCell.label
+              ) : (
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : 'asc'}
+                  onClick={() => {
+                    handleSortRequest(headCell.id);
+                  }}>
+                  {headCell.label}
+                </TableSortLabel>
+              )}
+            </TableCell>
+          ))}
+        </TableRow>
+      </TableHead>
     );
   };
 
@@ -85,17 +82,17 @@ export default function useTable(records, headCells, filterFn) {
     setPage(0);
   };
 
-  //   const TblPagination = () => (
-  //     <TablePagination
-  //       component="div"
-  //       page={page}
-  //       rowsPerPageOptions={pages}
-  //       rowsPerPage={rowsPerPage}
-  //       count={records.length}
-  //       onChangePage={handleChangePage}
-  //       onChangeRowsPerPage={handleChangeRowsPerPage}
-  //     />
-  //   );
+  const TblPagination = () => (
+    <TablePagination
+      component="div"
+      page={page}
+      rowsPerPageOptions={pages}
+      rowsPerPage={rowsPerPage}
+      count={records.length}
+      onPageChange={handleChangePage}
+      onRowsPerPageChange={handleChangeRowsPerPage}
+    />
+  );
 
   function stableSort(array, comparator) {
     const stabilizedThis = array.map((el, index) => [el, index]);
@@ -133,7 +130,7 @@ export default function useTable(records, headCells, filterFn) {
   return {
     TblContainer,
     TblHead,
-    // TblPagination,
+    TblPagination,
     recordsAfterPagingAndSorting,
   };
 }
