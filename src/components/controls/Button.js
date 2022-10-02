@@ -1,31 +1,29 @@
 import React from 'react';
 import { Button as MuiButton } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: '3px',
-  },
-  label: {
-    textTransform: 'none',
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     margin: theme.spacing(0.5),
+//   },
+//   label: {
+//     textTransform: 'none',
+//   },
+// }));
 
 export default function Button(props) {
   const { text, size, color, variant, onClick, ...other } = props;
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <MuiButton
       variant={variant || 'contained'}
       size={size || 'large'}
-      color={color || 'primary'}
+      color={color || 'success'}
       onClick={onClick}
-      {...other}>
+      {...other}
+      // classes={{ root: classes.root, label: classes.label }}
+    >
       {text}
     </MuiButton>
-
-    // className={classes.root}
-    // <form className={classes.root} autoComplete="off" {...other}>
   );
 }

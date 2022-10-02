@@ -1,18 +1,16 @@
-import { Grid, TextField } from '@mui/material';
+import { Grid } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-// import Input from '../../components/controls/Input';
 import { Controls } from '../../components/controls/Controls';
 import useForm, { Form } from '../../components/useForm';
-import useTable from '../../components/useTable';
 import * as employeeService from '../../services/employeeService';
 
 const genderItems = [
-  { id: 'male', title: 'Nam' },
-  { id: 'female', title: 'Nữ' },
-  { id: 'other', title: 'Khác' },
+  { id: 'male', title: 'Male' },
+  { id: 'female', title: 'Female' },
+  { id: 'other', title: 'Other' },
 ];
 
-const initialValues = {
+const initialFValues = {
   id: 0,
   fullName: '',
   email: '',
@@ -25,13 +23,15 @@ const initialValues = {
 };
 
 export default function EmployeeForm(props) {
+  const { addOrEdit, recordForEdit } = props;
+
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     if ('fullName' in fieldValues)
       temp.fullName = fieldValues.fullName ? '' : 'Tên không được để trống';
     if ('mobile' in fieldValues)
       temp.mobile =
-        fieldValues.mobile.length > 9
+        fieldValues.mobile.length > 1
           ? ''
           : 'Số điện thoại phải có ít nhất 10 số';
     if ('city' in fieldValues)
@@ -45,91 +45,91 @@ export default function EmployeeForm(props) {
       return Object.values(temp).every((x) => x === '');
   };
 
-  const { values, setValues, errors, setErrors, resetForm, handleInputChange } =
-    useForm(initialValues, true, validate);
+  const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
+    useForm(initialFValues, true, validate);
 
-  const { addOrEdit, recordForEdit } = props;
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (validate()) {
+  //     addOrEdit(values, resetForm);
+  //     employeeService.insertEmployee(values);
+  //     resetForm();
+  //   }
+  // };
+
+  // OKe;
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
       addOrEdit(values, resetForm);
-      employeeService.insertEmployee(values);
-      resetForm();
     }
   };
-  console.log(recordForEdit);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (validate()) {
+  //     employeeService.insertEmployee(values);
+  //     resetForm();
+  //   }
+  // };
 
   useEffect(() => {
-    if (recordForEdit != null) {
+    if (recordForEdit != null)
       setValues({
         ...recordForEdit,
       });
-    }
-    console.log(recordForEdit);
   }, [recordForEdit, setValues]);
 
   return (
     <Form onSubmit={handleSubmit}>
-      {/* <Grid container m={2} pt={3}> */}
       <Grid container>
         <Grid item xs={6}>
           <Controls.Input
-            variant="outlined"
             name="fullName"
-            label="Họ và tên"
+            label="Full Name"
             value={values.fullName}
             onChange={handleInputChange}
             error={errors.fullName}
           />
+
           <Controls.Input
-            variant="outlined"
-            label="Số điện thoại"
+            label="Mobile"
             name="mobile"
             value={values.mobile}
             onChange={handleInputChange}
             error={errors.mobile}
           />
           <Controls.Input
-            variant="outlined"
-            label="Địa chỉ"
+            label="City"
             name="city"
             value={values.city}
             onChange={handleInputChange}
-            error={errors.city}
           />
         </Grid>
-
         <Grid item xs={6}>
           <Controls.RadioGroup
             name="gender"
-            label="Giới tính"
+            label="Gender"
             value={values.gender}
             onChange={handleInputChange}
             items={genderItems}
           />
-          {/* <Controls.Select
-            name="departmentId"
-            label="Department"
-            value={values.departmentId}
-            onChange={handleInputChange}
-            options={employeeService.getDepartmentCollection()}
-          /> */}
-          {/* <Controls.Checkbox
-            name="isPermanent"
-            label="Gì đó"
-            value={values.isPermanent}
-            onChange={handleInputChange}
-          /> */}
+
           <Controls.DatePicker
             name="hireDate"
-            label="Sinh nhật"
+            label="Hire Date"
             value={values.hireDate}
             onChange={handleInputChange}
           />
-          <div className="mt-5 flex gap-5">
+
+          <div>
             <Controls.Button type="submit" text="Submit" />
-            {/* <Controls.Button type="button" text="Reset" color="error" /> */}
-            <Controls.Button text="Reset" color="error" onClick={resetForm} />
+            <Controls.Button
+              type="button"
+              text="Reset"
+              color="error"
+              onClick={resetForm}
+            />
           </div>
         </Grid>
       </Grid>

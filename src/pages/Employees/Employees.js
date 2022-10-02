@@ -1,3 +1,7 @@
+import React, { Fragment, useState } from 'react';
+import * as employeeService from '../../services/employeeService';
+import ConfirmDialog from '../../components/ConfirmDialog';
+import useTable from '../../components/useTable';
 import {
   InputAdornment,
   TableBody,
@@ -5,36 +9,15 @@ import {
   TableRow,
   Toolbar,
 } from '@mui/material';
-import React, { Fragment, useState } from 'react';
-import useTable from '../../components/useTable';
-import EmployeeForm from './EmployeeForm';
-import * as employeeService from '../../services/employeeService';
 import { Controls } from '../../components/controls/Controls';
+import Popup from '../../components/Popup';
+import EmployeeForm from './EmployeeForm';
+import Notification from '../../components/Notification';
 import { Search } from '@mui/icons-material';
 import AddIcon from '@mui/icons-material/Add';
-import Popup from '../../components/controls/Popup';
-import Button from '../../components/controls/Button';
-import ActionButton from '../../components/controls/ActionButton';
-import Notification from '../../components/Notification';
+import CloseIcon from '@mui/icons-material/Close';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ConfirmDialog from '../../components/ConfirmDialog';
-import CloseIcon from '@mui/icons-material/Close';
-import { alpha, styled } from '@mui/material/styles';
-
-const useStyles = styled((theme) => ({
-  pageContent: {
-    margin: theme.spacing(5),
-    padding: theme.spacing(3),
-  },
-  searchInput: {
-    width: '75%',
-  },
-  newButton: {
-    position: 'absolute',
-    right: '10px',
-  },
-}));
 
 const headCells = [
   { id: 'fullName', label: 'Employee Name' },
@@ -45,82 +28,6 @@ const headCells = [
 ];
 
 export default function Employees() {
-  // const [records, setRecords] = useState(employeeService.getAllEmployees());
-  // const [recordForEdit, setRecordForEdit] = useState(null);
-  // const [openPopup, setOpenPopup] = useState(false);
-  // const [confirmDialog, setConfirmDialog] = useState({
-  //   isOpen: false,
-  //   title: '',
-  //   subTitle: '',
-  // });
-  // const [notify, setNotify] = useState({
-  //   isOpen: false,
-  //   message: '',
-  //   type: '',
-  // });
-  // const [filterFn, setFilterFn] = useState({
-  //   fn: (items) => {
-  //     return items;
-  //   },
-  // });
-  // const headCells = [
-  //   { id: 'fullName', label: 'Họ và tên' },
-  //   { id: 'mobile', label: 'Số điện thoại' },
-  //   { id: 'city', label: 'Địa chỉ' },
-  //   { id: 'gender', label: 'Giới tính' },
-  //   { id: 'hireData', label: 'Sinh nhật' },
-  //   { id: 'actions', label: 'Chức năng', disableSorting: true },
-  // ];
-
-  // const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
-  //   useTable(records, headCells, filterFn);
-
-  // const openInPopup = (item) => {
-  //   setRecordForEdit(item);
-  //   setOpenPopup(true);
-  // };
-  // const handleSearch = (e) => {
-  //   let target = e.target;
-  //   setFilterFn({
-  //     fn: (items) => {
-  //       if (target.value === '') return items;
-  //       else
-  //         return items.filter((x) =>
-  //           x.fullName.toLowerCase().includes(target.value)
-  //         );
-  //     },
-  //   });
-  // };
-  // const addOrEdit = (employee, resetForm) => {
-  //   if (employee.id === 0) {
-  //     employeeService.insertEmployee(employee);
-  //   } else employeeService.updateEmployee(employee);
-  //   resetForm();
-  //   setRecordForEdit(null);
-  //   setOpenPopup(false);
-  //   setRecords(employeeService.getAllEmployees());
-
-  //   setNotify({
-  //     isOpen: true,
-  //     message: 'Thêm thành công',
-  //     type: 'success',
-  //   });
-  // };
-
-  // const onDelete = (id) => {
-  //   setConfirmDialog({
-  //     ...confirmDialog,
-  //     isOpen: false,
-  //   });
-
-  //   employeeService.deleteEmployee(id);
-  //   setNotify({
-  //     isOpen: true,
-  //     message: 'Xóa thành công',
-  //     type: 'error',
-  //   });
-  // };
-  const classes = useStyles();
   const [recordForEdit, setRecordForEdit] = useState(null);
   const [records, setRecords] = useState(employeeService.getAllEmployees());
   const [filterFn, setFilterFn] = useState({
@@ -147,7 +54,7 @@ export default function Employees() {
     let target = e.target;
     setFilterFn({
       fn: (items) => {
-        if (target.value == '') return items;
+        if (target.value === '') return items;
         else
           return items.filter((x) =>
             x.fullName.toLowerCase().includes(target.value)
@@ -180,6 +87,7 @@ export default function Employees() {
       ...confirmDialog,
       isOpen: false,
     });
+
     employeeService.deleteEmployee(id);
     setRecords(employeeService.getAllEmployees());
     setNotify({
@@ -233,7 +141,7 @@ export default function Employees() {
           </div>
         </section>
         <div className="bg-white flex mb-6 rounded-2xl flex-col dark:bg-slate-900/70">
-          {/* <Toolbar className="flex justify-between">
+          <Toolbar className="flex justify-between">
             <Controls.Input
               className="w-3/4"
               label="Search Employees"
@@ -254,34 +162,10 @@ export default function Employees() {
                 setOpenPopup(true);
               }}
             />
-          </Toolbar> */}
-          <Toolbar>
-            <Controls.Input
-              label="Search Employees"
-              className={classes.searchInput}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search />
-                  </InputAdornment>
-                ),
-              }}
-              onChange={handleSearch}
-            />
-            <Controls.Button
-              text="Add New"
-              variant="outlined"
-              startIcon={<AddIcon />}
-              className={classes.newButton}
-              onClick={() => {
-                setOpenPopup(true);
-                setRecordForEdit(null);
-              }}
-            />
           </Toolbar>
 
           <div className="m-3">
-            {/* <TblContainer>
+            <TblContainer>
               <TblHead />
               <TableBody>
                 {recordsAfterPagingAndSorting().map((item, index) => (
@@ -294,14 +178,12 @@ export default function Employees() {
                     </TableCell>
                     <TableCell>{item.hireDate}</TableCell>
                     <TableCell>
-                      <Controls.ActionButton color="error" variant="contained">
-                        <EditIcon
-                          color="success"
-                          variant="outlined"
-                          onClick={() => {
-                            openInPopup();
-                          }}
-                        />
+                      <Controls.ActionButton
+                        color="primary"
+                        onClick={() => {
+                          openInPopup(item);
+                        }}>
+                        <EditIcon fontSize="small" />
                       </Controls.ActionButton>
                       <Controls.ActionButton>
                         <DeleteIcon
@@ -324,48 +206,10 @@ export default function Employees() {
                 ))}
               </TableBody>
             </TblContainer>
-            <TblPagination /> */}
-
-            <TblContainer>
-              <TblHead />
-              <TableBody>
-                {recordsAfterPagingAndSorting().map((item) => (
-                  <TableRow key={item.id}>
-                    <TableCell>{item.fullName}</TableCell>
-                    <TableCell>{item.email}</TableCell>
-                    <TableCell>{item.mobile}</TableCell>
-                    <TableCell>{item.department}</TableCell>
-                    <TableCell>
-                      <Controls.ActionButton
-                        color="primary"
-                        onClick={() => {
-                          openInPopup(item);
-                        }}>
-                        <EditIcon fontSize="small" />
-                      </Controls.ActionButton>
-                      <Controls.ActionButton
-                        color="secondary"
-                        onClick={() => {
-                          setConfirmDialog({
-                            isOpen: true,
-                            title: 'Are you sure to delete this record?',
-                            subTitle: "You can't undo this operation",
-                            onConfirm: () => {
-                              onDelete(item.id);
-                            },
-                          });
-                        }}>
-                        <CloseIcon fontSize="small" />
-                      </Controls.ActionButton>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </TblContainer>
             <TblPagination />
           </div>
 
-          {/* <Popup
+          <Popup
             openPopup={openPopup}
             setOpenPopup={setOpenPopup}
             title="Thêm bệnh nhân mới">
@@ -373,18 +217,6 @@ export default function Employees() {
           </Popup>
           <Notification notify={notify} setNotify={setNotify} />
 
-          <ConfirmDialog
-            confirmDialog={confirmDialog}
-            setConfirmDialog={setConfirmDialog}
-          /> */}
-
-          <Popup
-            title="Employee Form"
-            openPopup={openPopup}
-            setOpenPopup={setOpenPopup}>
-            <EmployeeForm recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
-          </Popup>
-          <Notification notify={notify} setNotify={setNotify} />
           <ConfirmDialog
             confirmDialog={confirmDialog}
             setConfirmDialog={setConfirmDialog}
