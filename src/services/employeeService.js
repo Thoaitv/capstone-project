@@ -24,6 +24,12 @@ export function updateEmployee(data) {
   localStorage.setItem(KEYS.employees, JSON.stringify(employees));
 }
 
+export function deleteEmployee(id) {
+  let employees = getAllEmployees();
+  employees = employees.filter((x) => x.id != id);
+  localStorage.setItem(KEYS.employees, JSON.stringify(employees));
+}
+
 export function generateEmployeeId() {
   if (localStorage.getItem(KEYS.employeeId) == null)
     localStorage.setItem(KEYS.employeeId, '0');
@@ -32,20 +38,15 @@ export function generateEmployeeId() {
   return id;
 }
 
-// export function getAllEmployees() {
-//   if (localStorage.getItem(KEYS.employees) == null)
-//     localStorage.setItem(KEYS.employees, JSON.stringify([]));
-//   let employees = JSON.parse(localStorage.getItem(KEYS.employees));
-//   //map departmentID to department title
-//   let departments = getDepartmentCollection();
-//   return employees.map((x) => ({
-//     ...x,
-//     department: departments[x.departmentId - 1].title,
-//   }));
-// }
-
 export function getAllEmployees() {
   if (localStorage.getItem(KEYS.employees) == null)
     localStorage.setItem(KEYS.employees, JSON.stringify([]));
-  return JSON.parse(localStorage.getItem(KEYS.employees));
+  let employees = JSON.parse(localStorage.getItem(KEYS.employees));
+  //map departmentID to department title
+  // let departments = getDepartmentCollection();
+  // return employees.map((x) => ({
+  //   ...x,
+  //   department: departments[x.departmentId - 1].title,
+  // }));
+  return employees;
 }
