@@ -22,9 +22,10 @@ function App() {
           <Sidebar />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/benh-nhan" element={<ListPatient />} />
+            <Route path="/benh-nhan" element={<Patients />} />
+            <Route path="/benh-nhan/:id" element={<PatientProfile />} />
+            <Route path="/trang-bac si" element={<ListPatient />} />
             <Route path="/chi-tiet-benh-nhan" element={<PatientProfile />} />
-            <Route path="/bac-si" element={<Patients />} />
             {/* <Route path="/demo-dialog" element={<Employees />} /> */}
           </Routes>
         </div>
