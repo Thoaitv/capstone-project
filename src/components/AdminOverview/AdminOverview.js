@@ -43,7 +43,7 @@ const AdminOverview = () => {
             </span>
             <h1 className="leading-tight text-3xl">Tổng quan</h1>
           </div>
-          <a className="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded-full border-gray-800 dark:border-white ring-gray-300 dark:ring-gray-400 bg-gray-800 text-white dark:bg-white dark:text-black hover:bg-gray-700 hover:dark:bg-slate-100  text-sm px-3 py-1">
+          {/* <a className="inline-flex justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring duration-150 border cursor-pointer rounded-full border-gray-800 dark:border-white ring-gray-300 dark:ring-gray-400 bg-gray-800 text-white dark:bg-white dark:text-black hover:bg-gray-700 hover:dark:bg-slate-100  text-sm px-3 py-1">
             <span className="inline-flex justify-center items-center w-6 h-6 ">
               <svg
                 viewBox="0 0 24 24"
@@ -56,7 +56,7 @@ const AdminOverview = () => {
               </svg>
             </span>
             <span className="px-1">Thêm bác sĩ/Bệnh nhân/Y tá</span>
-          </a>
+          </a> */}
         </section>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
           <div className="bg-white flex  rounded-2xl flex-col dark:bg-slate-900/70">

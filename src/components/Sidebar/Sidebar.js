@@ -12,7 +12,7 @@ const Sidebar = () => {
       <div className="lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900 bg-gray-800">
         <div className="flex flex-row h-14 items-center justify-between dark:bg-slate-900 bg-gray-900 text-white">
           <div className="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0">
-            <b className="font-black">One</b>
+            <b className="font-black uppercase">Trang quản lý</b>
           </div>
           <button className="hidden lg:inline-block xl:hidden p-3">
             <span className="inline-flex justify-center items-center w-6 h-6 ">
@@ -184,6 +184,26 @@ const Sidebar = () => {
             </li>
           </ul>
         </div>
+        <ul>
+          <li>
+            <div className="flex cursor-pointer py-3 border-blue-600 dark:border-blue-500 ring-blue-300 dark:ring-blue-700 bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 hover:border-blue-700 hover:dark:bg-blue-600 hover:dark:border-blue-600">
+              <span className="inline-flex justify-center items-center w-16 h-6 flex-none ">
+                <svg
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  class="inline-block">
+                  <path
+                    fill="currentColor"
+                    d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z"></path>
+                </svg>
+              </span>
+              <span class="grow text-ellipsis line-clamp-1 pr-12 ">
+                Đăng xuất
+              </span>
+            </div>
+          </li>
+        </ul>
       </div>
     </aside>
   );
