@@ -196,7 +196,6 @@ const ListPatient = () => {
             </div>
           </div>
         </div>
-        {/* Home Loan Account */}
 
         {/* Lịch Trực */}
         <section className="pt-6 mb-6 flex items-center justify-between">

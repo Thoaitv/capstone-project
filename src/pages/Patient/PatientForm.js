@@ -2,12 +2,12 @@ import { Grid } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Controls } from '../../components/controls/Controls';
 import useForm, { Form } from '../../components/useForm';
-import * as employeeService from '../../services/employeeService';
+// import * as patientService from '../../services/patientService';
 
 const genderItems = [
-  { id: 'male', title: 'Male' },
-  { id: 'female', title: 'Female' },
-  { id: 'other', title: 'Other' },
+  { id: 'male', title: 'Nam' },
+  { id: 'female', title: 'Nữ' },
+  { id: 'other', title: 'Khác' },
 ];
 
 const initialFValues = {
@@ -22,7 +22,7 @@ const initialFValues = {
   isPermanent: false,
 };
 
-export default function EmployeeForm(props) {
+export default function PatientForm(props) {
   const { addOrEdit, recordForEdit } = props;
 
   const validate = (fieldValues = values) => {
@@ -47,16 +47,6 @@ export default function EmployeeForm(props) {
 
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(initialFValues, true, validate);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (validate()) {
-  //     addOrEdit(values, resetForm);
-  //     employeeService.insertEmployee(values);
-  //     resetForm();
-  //   }
-  // };
-
   // OKe;
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -64,14 +54,6 @@ export default function EmployeeForm(props) {
       addOrEdit(values, resetForm);
     }
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (validate()) {
-  //     employeeService.insertEmployee(values);
-  //     resetForm();
-  //   }
-  // };
 
   useEffect(() => {
     if (recordForEdit != null)
@@ -86,21 +68,21 @@ export default function EmployeeForm(props) {
         <Grid item xs={6}>
           <Controls.Input
             name="fullName"
-            label="Full Name"
+            label="Họ và tên"
             value={values.fullName}
             onChange={handleInputChange}
             error={errors.fullName}
           />
 
           <Controls.Input
-            label="Mobile"
+            label="Số điện thoại"
             name="mobile"
             value={values.mobile}
             onChange={handleInputChange}
             error={errors.mobile}
           />
           <Controls.Input
-            label="City"
+            label="Đại chỉ"
             name="city"
             value={values.city}
             onChange={handleInputChange}
@@ -109,7 +91,7 @@ export default function EmployeeForm(props) {
         <Grid item xs={6} className=" flex flex-col justify-end flex-wrap">
           <Controls.RadioGroup
             name="gender"
-            label="Gender"
+            label="Giới tính"
             value={values.gender}
             onChange={handleInputChange}
             items={genderItems}
@@ -117,7 +99,7 @@ export default function EmployeeForm(props) {
 
           <Controls.DatePicker
             name="hireDate"
-            label="Hire Date"
+            label="Sinh nhật"
             value={values.hireDate}
             onChange={handleInputChange}
           />

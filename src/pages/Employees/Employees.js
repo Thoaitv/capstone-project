@@ -15,15 +15,17 @@ import EmployeeForm from './EmployeeForm';
 import Notification from '../../components/Notification';
 import { Search } from '@mui/icons-material';
 import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close';
+// import CloseIcon from '@mui/icons-material/Close';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+// import { format } from 'date-fns';
+import dayjs from 'dayjs';
 const headCells = [
-  { id: 'fullName', label: 'Employee Name' },
-  { id: 'email', label: 'Email Address (Personal)' },
-  { id: 'mobile', label: 'Mobile Number' },
-  { id: 'department', label: 'Department' },
+  { id: 'fullName', label: 'Họ và tên' },
+  { id: 'email', label: 'Số' },
+  { id: 'mobile', label: 'Địa chỉ' },
+  { id: 'city', label: 'Giới tính' },
+  { id: 'department', label: 'Ngày tháng năm sinh' },
   { id: 'actions', label: 'Actions', disableSorting: true },
 ];
 
@@ -35,6 +37,7 @@ export default function Employees() {
       return items;
     },
   });
+
   const [openPopup, setOpenPopup] = useState(false);
   const [notify, setNotify] = useState({
     isOpen: false,
@@ -125,7 +128,7 @@ export default function Employees() {
           <div className="m-3"></div>
         </div>
         <section className="pt-6 mb-6 flex items-center justify-between">
-          <div className="flex items-center justify-start">
+          <div className="flex items-center justify-between">
             <span className="inline-flex justify-center items-center w-6 h-6 mr-2">
               <svg
                 viewBox="0 0 24 24"
@@ -143,8 +146,7 @@ export default function Employees() {
         <div className="bg-white flex mb-6 rounded-2xl flex-col dark:bg-slate-900/70">
           <Toolbar className="flex justify-between">
             <Controls.Input
-              className="w-3/4"
-              label="Search Employees"
+              label="Tìm kiếm bệnh nhân"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -152,6 +154,7 @@ export default function Employees() {
                   </InputAdornment>
                 ),
               }}
+              // size="small"
               onChange={handleSearch}
             />
             <Controls.Button
@@ -177,6 +180,7 @@ export default function Employees() {
                       {item.gender === 'male' ? 'Nam' : 'Nữ'}
                     </TableCell>
                     <TableCell>{item.hireDate}</TableCell>
+
                     <TableCell>
                       <Controls.ActionButton
                         color="primary"
@@ -216,7 +220,6 @@ export default function Employees() {
             <EmployeeForm recordForEdit={recordForEdit} addOrEdit={addOrEdit} />
           </Popup>
           <Notification notify={notify} setNotify={setNotify} />
-
           <ConfirmDialog
             confirmDialog={confirmDialog}
             setConfirmDialog={setConfirmDialog}

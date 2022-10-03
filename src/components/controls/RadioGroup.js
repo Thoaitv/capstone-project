@@ -13,7 +13,12 @@ export default function RadioGroup(props) {
   return (
     <FormControl>
       <FormLabel>{label}</FormLabel>
-      <MuiRadioGroup row name={name} value={value} onChange={onChange}>
+      <MuiRadioGroup
+        row
+        name={name}
+        value={value}
+        onChange={onChange}
+        className="justify-between">
         {items.map((item, index) => (
           <FormControlLabel
             key={item.id}

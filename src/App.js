@@ -10,6 +10,7 @@ import Doctors from './pages/Doctors/Doctors';
 // import DoctorForm from './pages/Doctors/DoctorForm';
 // import DemoDialog from './components/Dialog/DemoDialog';
 import Employees from './pages/Employees/Employees';
+import Patients from './pages/Patient/Patients';
 function App() {
   return (
     <Router>
@@ -23,8 +24,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/benh-nhan" element={<ListPatient />} />
             <Route path="/chi-tiet-benh-nhan" element={<PatientProfile />} />
-            {/* <Route path="/bac-si" element={<Doctors />} /> */}
-            <Route path="/demo-dialog" element={<Employees />} />
+            <Route path="/bac-si" element={<Patients />} />
+            {/* <Route path="/demo-dialog" element={<Employees />} /> */}
           </Routes>
         </div>
       </div>
