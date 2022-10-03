@@ -21,7 +21,10 @@ export default function Notification(props) {
       autoHideDuration={3000}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       onClose={handleClose}>
-      <Alert onClose={handleClose} severity={notify.type || 'success'}>
+      <Alert
+        onClose={handleClose}
+        variant="filled"
+        severity={notify.type || 'success'}>
         {notify.message}
       </Alert>
     </Snackbar>
