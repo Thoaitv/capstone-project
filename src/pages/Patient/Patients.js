@@ -19,16 +19,17 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import dayjs from 'dayjs';
-const headCells = [
-  { id: 'fullName', label: 'Họ và tên' },
-  { id: 'email', label: 'Số' },
-  { id: 'mobile', label: 'Địa chỉ' },
-  { id: 'city', label: 'Giới tính' },
-  { id: 'department', label: 'Ngày tháng năm sinh' },
-  { id: 'actions', label: 'Hoạt động', disableSorting: true },
-];
+import { Link } from 'react-router-dom';
 
 export default function Patients() {
+  const headCells = [
+    { id: 'fullName', label: 'Họ và tên' },
+    { id: 'email', label: 'Số' },
+    { id: 'mobile', label: 'Địa chỉ' },
+    { id: 'city', label: 'Giới tính' },
+    { id: 'department', label: 'Ngày tháng năm sinh' },
+    { id: 'actions', label: 'Hoạt động', disableSorting: true },
+  ];
   const [recordForEdit, setRecordForEdit] = useState(null);
   const [records, setRecords] = useState(patientService.getAllPatients());
   const [filterFn, setFilterFn] = useState({
@@ -36,7 +37,6 @@ export default function Patients() {
       return items;
     },
   });
-
   const [openPopup, setOpenPopup] = useState(false);
   const [notify, setNotify] = useState({
     isOpen: false,
@@ -96,6 +96,11 @@ export default function Patients() {
     setOpenPopup(true);
   };
 
+  const linkToProfile = (item) => {
+    setRecordForEdit(item);
+    // setOpenPopup(true);
+  };
+
   const onDelete = (id) => {
     setConfirmDialog({
       ...confirmDialog,
@@ -130,187 +135,6 @@ export default function Patients() {
             <h1 className="leading-tight text-2xl">Thêm bệnh nhân</h1>
           </div>
         </section>
-
-        {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div className="flex flex-col justify-between ">
-            <div className="bg-white flex mb-6 last:mb-0 rounded-2xl flex-col dark:bg-slate-900/70">
-              <div className="flex-1 p-6">
-                <div className="justify-between items-center  block md:flex">
-                  <div className="justify-start items-center  block md:flex">
-                    <span className="inline-flex justify-center items-center w-12 h-12 dark:bg-slate-800 md:mr-6 ">
-                      <img
-                        src="https://images.pexels.com/photos/9509207/pexels-photo-9509207.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt=""
-                        className="rounded-full w-12 h-12"
-                      />
-                    </span>
-                    <div className="text-center space-y-1 md:text-left md:mr-6">
-                      <h4 className="text-xl">Tạ Văn Thoại</h4>
-                      <p className="text-gray-500 dark:text-slate-400">
-                        <b>3 days ago</b> via Turcotte
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-center md:text-right space-y-2">
-                    <p className="text-sm text-gray-500">Home Loan Account</p>
-                    <div>
-                      <div className="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-emerald-500 border-emerald-500 text-white ">
-                        <span>deposit</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white flex mb-6 last:mb-0 rounded-2xl flex-col dark:bg-slate-900/70">
-              <div className="flex-1 p-6">
-                <div className="justify-between items-center  block md:flex">
-                  <div className="justify-start items-center  block md:flex">
-                    <span className="inline-flex justify-center items-center w-12 h-12 dark:bg-slate-800 md:mr-6 ">
-                      <img
-                        src="https://images.pexels.com/photos/9509207/pexels-photo-9509207.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt=""
-                        className="rounded-full w-12 h-12"
-                      />
-                    </span>
-                    <div className="text-center space-y-1 md:text-left md:mr-6">
-                      <h4 className="text-xl">375.53</h4>
-                      <p className="text-gray-500 dark:text-slate-400">
-                        <b>3 days ago</b> via Turcotte
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-center md:text-right space-y-2">
-                    <p className="text-sm text-gray-500">Home Loan Account</p>
-                    <div>
-                      <div className="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-emerald-500 border-emerald-500 text-white ">
-                        <span>deposit</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white flex mb-6 last:mb-0 rounded-2xl flex-col dark:bg-slate-900/70">
-              <div className="flex-1 p-6">
-                <div className="justify-between items-center  block md:flex">
-                  <div className="justify-start items-center  block md:flex">
-                    <span className="inline-flex justify-center items-center w-12 h-12 dark:bg-slate-800 md:mr-6 ">
-                      <img
-                        src="https://images.pexels.com/photos/9509207/pexels-photo-9509207.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt=""
-                        className="rounded-full w-12 h-12"
-                      />
-                    </span>
-                    <div className="text-center space-y-1 md:text-left md:mr-6">
-                      <h4 className="text-xl">Tạ Văn Thoại</h4>
-                      <p className="text-gray-500 dark:text-slate-400">
-                        <b>3 days ago</b> via Turcotte
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-center md:text-right space-y-2">
-                    <p className="text-sm text-gray-500">Home Loan Account</p>
-                    <div>
-                      <div className="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-emerald-500 border-emerald-500 text-white ">
-                        <span>deposit</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white flex mb-6 last:mb-0 rounded-2xl flex-col dark:bg-slate-900/70">
-              <div className="flex-1 p-6">
-                <div className="justify-between items-center  block md:flex">
-                  <div className="justify-start items-center  block md:flex">
-                    <span className="inline-flex justify-center items-center w-12 h-12 dark:bg-slate-800 md:mr-6 ">
-                      <img
-                        src="https://images.pexels.com/photos/9509207/pexels-photo-9509207.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt=""
-                        className="rounded-full w-12 h-12"
-                      />
-                    </span>
-                    <div className="text-center space-y-1 md:text-left md:mr-6">
-                      <h4 className="text-xl">375.53</h4>
-                      <p className="text-gray-500 dark:text-slate-400">
-                        <b>3 days ago</b> via Turcotte
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-center md:text-right space-y-2">
-                    <p className="text-sm text-gray-500">Home Loan Account</p>
-                    <div>
-                      <div className="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-emerald-500 border-emerald-500 text-white ">
-                        <span>deposit</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col justify-between">
-            <div className="bg-white flex mb-6 last:mb-0 rounded-2xl flex-col dark:bg-slate-900/70">
-              <div className="flex-1 p-6">
-                <div className="justify-between items-center  block md:flex">
-                  <div className="justify-start items-center  block md:flex">
-                    <span className="inline-flex justify-center items-center w-12 h-12 dark:bg-slate-800 md:mr-6 ">
-                      <img
-                        src="https://images.pexels.com/photos/9509207/pexels-photo-9509207.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt=""
-                        className="rounded-full w-12 h-12"
-                      />
-                    </span>
-                    <div className="text-center space-y-1 md:text-left md:mr-6">
-                      <h4 className="text-xl">375.53</h4>
-                      <p className="text-gray-500 dark:text-slate-400">
-                        <b>3 days ago</b> via Turcotte
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-center md:text-right space-y-2">
-                    <p className="text-sm text-gray-500">Home Loan Account</p>
-                    <div>
-                      <div className="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-emerald-500 border-emerald-500 text-white ">
-                        <span>deposit</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white flex mb-6 last:mb-0 rounded-2xl flex-col dark:bg-slate-900/70">
-              <div className="flex-1 p-6">
-                <div className="justify-between items-center  block md:flex">
-                  <div className="justify-start items-center  block md:flex">
-                    <span className="inline-flex justify-center items-center w-12 h-12 dark:bg-slate-800 md:mr-6 ">
-                      <img
-                        src="https://images.pexels.com/photos/9509207/pexels-photo-9509207.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt=""
-                        className="rounded-full w-12 h-12"
-                      />
-                    </span>
-                    <div className="text-center space-y-1 md:text-left md:mr-6">
-                      <h4 className="text-xl">375.53</h4>
-                      <p className="text-gray-500 dark:text-slate-400">
-                        <b>3 days ago</b> via Turcotte
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-center md:text-right space-y-2">
-                    <p className="text-sm text-gray-500">Home Loan Account</p>
-                    <div>
-                      <div className="inline-flex items-center capitalize leading-none text-xs border rounded-full py-1 px-3 bg-emerald-500 border-emerald-500 text-white ">
-                        <span>deposit</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="flex flex-col justify-between ">
@@ -487,7 +311,13 @@ export default function Patients() {
               <TableBody>
                 {recordsAfterPagingAndSorting().map((item, index) => (
                   <TableRow key={index}>
-                    <TableCell>{item.fullName}</TableCell>
+                    <TableCell
+                      style={{ fontWeight: 'bold', cursor: 'pointer' }}
+                      onClick={() => {
+                        linkToProfile(item);
+                      }}>
+                      <Link to={'/benh-nhan/' + item.id}>{item.fullName}</Link>
+                    </TableCell>
                     <TableCell>{item.mobile}</TableCell>
                     <TableCell>{item.city}</TableCell>
                     <TableCell>
